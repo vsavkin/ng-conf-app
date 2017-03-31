@@ -11,7 +11,8 @@
     "e2e": "protractor ./protractor.conf.js",
     "prepree2e": "npm start",
     "pree2e": "webdriver-manager update --standalone false --gecko false --quiet",
-    "lighthouse": "lighthouse --perf --output=pretty http://localhost:4200"
+    "lighthouse": "lighthouse --perf --output=pretty http://localhost:4200",
+    "i18n:extract": "ng-xi18n -p src/tsconfig.app.json && mv src/messages.xlf translations/"
   },
   "private": true,
   "dependencies": {

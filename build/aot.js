@@ -5,17 +5,25 @@ const nodeModules = path.join(process.cwd(), 'node_modules');
 const {CriticalPlugin} = require('@nrwl/webpack-plugin-critical');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-module.exports = function () {
+module.exports = function (env) {
+  const locale = env.locale;
+
+  const i18nConfig = (!locale || locale === 'en') ? {} : {
+    i18nFile: './translations/messages.' + locale + '.xlf',
+    i18nFormat: 'xlf',
+    locale: locale
+  };
+
   return {
     plugins: [
-      new AotPlugin({
+      new AotPlugin(Object.assign({
         "mainPath": "main.ts",
         "hostReplacementPaths": {
           "environments/environment.ts": "environments/environment.ts"
         },
         "exclude": [],
         "tsConfigPath": "src/tsconfig.app.json"
-      }),
+      }, i18nConfig)),
       new CommonsChunkPlugin({
         "name": "inline",
         "minChunks": null

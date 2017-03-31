@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="2757282770985955825feeb842359b6e36a6fb29" datatype="html">
+        <source>Mail App</source>
+        <target>Почта</target>
+        <note priority="1" from="description">some comment to the translator</note>
+        <note priority="1" from="meaning">title</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
