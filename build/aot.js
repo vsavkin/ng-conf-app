@@ -2,6 +2,7 @@ const path = require('path');
 const {CommonsChunkPlugin} = require('webpack').optimize;
 const {AotPlugin} = require('@ngtools/webpack');
 const nodeModules = path.join(process.cwd(), 'node_modules');
+const {CriticalPlugin} = require('@nrwl/webpack-plugin-critical');
 
 module.exports = function () {
   return {
@@ -24,6 +25,13 @@ module.exports = function () {
         "chunks": [
           "main"
         ]
+      }),
+      new CriticalPlugin({
+        src: 'index.html',
+        inline: true,
+        minify: true,
+        dest: 'index.html'
+      })
       })
     ],
 
@@ -33,9 +41,6 @@ module.exports = function () {
       ],
       "polyfills": [
         "./src/polyfills.ts"
-      ],
-      "styles": [
-        "./src/styles.css"
       ]
     },
 

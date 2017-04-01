@@ -34,9 +34,6 @@ module.exports = function () {
       ],
       "polyfills": [
         "./src/polyfills.ts"
-      ],
-      "styles": [
-        "./src/styles.css"
       ]
     },
 

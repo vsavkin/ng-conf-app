@@ -1,7 +1,6 @@
 const path = require('path');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
 
@@ -114,65 +113,6 @@ module.exports = function (env = {}) {
           ]
         },
         {
-          "include": [
-            path.join(process.cwd(), "src/styles.css")
-          ],
-          "test": /\.css$/,
-          "loaders": ExtractTextPlugin.extract({
-            "use": [
-              "css-loader?{\"sourceMap\":false,\"importLoaders\":1}",
-              "postcss-loader"
-            ],
-            "fallback": "style-loader",
-            "publicPath": ""
-          })
-        },
-        {
-          "include": [
-            path.join(process.cwd(), "src/styles.css")
-          ],
-          "test": /\.scss$|\.sass$/,
-          "loaders": ExtractTextPlugin.extract({
-            "use": [
-              "css-loader?{\"sourceMap\":false,\"importLoaders\":1}",
-              "postcss-loader",
-              "sass-loader"
-            ],
-            "fallback": "style-loader",
-            "publicPath": ""
-          })
-        },
-        {
-          "include": [
-            path.join(process.cwd(), "src/styles.css")
-          ],
-          "test": /\.less$/,
-          "loaders": ExtractTextPlugin.extract({
-            "use": [
-              "css-loader?{\"sourceMap\":false,\"importLoaders\":1}",
-              "postcss-loader",
-              "less-loader"
-            ],
-            "fallback": "style-loader",
-            "publicPath": ""
-          })
-        },
-        {
-          "include": [
-            path.join(process.cwd(), "src/styles.css")
-          ],
-          "test": /\.styl$/,
-          "loaders": ExtractTextPlugin.extract({
-            "use": [
-              "css-loader?{\"sourceMap\":false,\"importLoaders\":1}",
-              "postcss-loader",
-              "stylus-loader?{\"sourceMap\":false,\"paths\":[]}"
-            ],
-            "fallback": "style-loader",
-            "publicPath": ""
-          })
-        },
-        {
           "test": /\.ts$/,
           "loader": "@ngtools/webpack"
         }
@@ -183,7 +123,8 @@ module.exports = function (env = {}) {
       new GlobCopyWebpackPlugin({
         "patterns": [
           "assets",
-          "favicon.ico"
+          "favicon.ico",
+          "styles.css"
         ],
         "globOptions": {
           "cwd": path.resolve(__dirname, 'src'),
@@ -193,8 +134,8 @@ module.exports = function (env = {}) {
       }),
       new ProgressPlugin(),
       new HtmlWebpackPlugin({
-        "template": "./src/index.html",
-        "filename": "./index.html",
+        "template": "src/index.html",
+        "filename": "index.html",
         "hash": false,
         "inject": true,
         "compile": true,
@@ -221,10 +162,6 @@ module.exports = function (env = {}) {
         }
       }),
       new BaseHrefWebpackPlugin({}),
-      new ExtractTextPlugin({
-        "filename": "[name].bundle.css",
-        "disable": true
-      }),
       new LoaderOptionsPlugin({
         "sourceMap": false,
         "options": {
