@@ -1,25 +1,18 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/0.13/config/configuration-file.html
-
 module.exports = function (config) {
+  const webpackConfig = require("./webpack.config")({mode: 'test'});
+
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular/cli'],
-    plugins: [
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma')
-    ],
+    frameworks: ['jasmine'],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
+      { pattern: './dist/pretest.bundle.js', watched: false, served: true },
       { pattern: './src/test.ts', watched: false }
     ],
     preprocessors: {
-      './src/test.ts': ['@angular/cli']
+      './src/test.ts': ['webpack', 'sourcemap']
     },
     mime: {
       'text/x-typescript': ['ts','tsx']
@@ -28,12 +21,13 @@ module.exports = function (config) {
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true
     },
-    angularCli: {
-      environment: 'dev'
+    reporters: ['progress'],
+
+    webpack: webpackConfig,
+    webpackMiddleware: {
+      stats: 'errors-only'
     },
-    reporters: config.angularCli && config.angularCli.codeCoverage
-              ? ['progress', 'coverage-istanbul']
-              : ['progress', 'kjhtml'],
+
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
