@@ -1,0 +1,13 @@
+<h2>
+  {{(conversation|async)?.title}}
+</h2>
+
+<router-outlet></router-outlet>
+
+<button md-raised-button (click)="goUp()">←</button>
+<button md-raised-button [routerLink]="[{outlets: {popup: 'compose'}}]">Reply</button>
+
+
+<div>
+  <router-outlet name="popup"></router-outlet>
+</div>
