@@ -3,6 +3,7 @@ const {CommonsChunkPlugin} = require('webpack').optimize;
 const {AotPlugin} = require('@ngtools/webpack');
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const {CriticalPlugin} = require('@nrwl/webpack-plugin-critical');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 module.exports = function () {
   return {
@@ -31,7 +32,9 @@ module.exports = function () {
         inline: true,
         minify: true,
         dest: 'index.html'
-      })
+      }),
+      new ScriptExtHtmlWebpackPlugin({
+        defaultAttribute: 'defer'
       })
     ],
 
