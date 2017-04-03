@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 
-import {Component} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
@@ -9,7 +9,8 @@ import {Store} from '@ngrx/store';
 
 @Component({
   templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.css']
+  styleUrls: ['./conversation.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConversationComponent {
   conversation: Observable<Conversation>;

@@ -1,13 +1,14 @@
 import 'rxjs/add/operator/pluck';
 
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 
 @Component({
   templateUrl: './compose.component.html',
-  styleUrls: ['./compose.component.css']
+  styleUrls: ['./compose.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComposeComponent {
   form =
