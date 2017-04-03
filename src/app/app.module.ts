@@ -3,8 +3,8 @@ import 'rxjs/add/operator/mergeMap';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule} from '@angular/router';
-import {MaterialModule} from '@angular/material';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import {MdCardModule} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
 import {RouterStoreModule} from '@ngrx/router-store';
 
@@ -12,10 +12,6 @@ import 'rxjs/add/operator/map';
 import {AppComponent} from './app.component';
 import {conversationsReducer, messagesReducer} from '../model';
 import {ConversationsComponent} from './conversations/conversations.component';
-import {ConversationComponent} from './conversation/conversation.component';
-import {MessagesComponent} from './conversation/messages/messages.component';
-import {MessageComponent} from './conversation/message/message.component';
-import {ComposeComponent} from './compose/compose.component';
 
 
 // clang-format off
@@ -30,22 +26,7 @@ const routes = [
       },
       {
         path: ':id',
-        component: ConversationComponent,
-        children: [
-          {
-            path: '',
-            component: MessagesComponent
-          },
-          {
-            path: 'messages/:id',
-            component: MessageComponent
-          },
-          {
-            path: 'compose',
-            component: ComposeComponent,
-            outlet: 'popup'
-          }
-        ]
+        loadChildren: 'app/conversation/conversation.module#ConversationModule'
       }
     ]
   }
@@ -54,14 +35,14 @@ const routes = [
 
 @NgModule({
   declarations:
-    [AppComponent, ConversationsComponent, ConversationComponent, MessagesComponent, MessageComponent, ComposeComponent],
+    [AppComponent, ConversationsComponent],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
     ReactiveFormsModule,
     BrowserModule,
-    MaterialModule,
     StoreModule.provideStore({conversations: conversationsReducer, messages: messagesReducer}),
-    RouterStoreModule.connectRouter()
+    RouterStoreModule.connectRouter(),
+    MdCardModule
   ],
   bootstrap: [AppComponent]
 })
