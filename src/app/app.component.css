@@ -1,0 +1,29 @@
+
+
+nav a {
+  padding: 10px 5px;
+  display: block;
+}
+
+nav a:hover {
+  background-color: aliceblue;
+}
+
+nav a.active {
+  background-color: #dbe9f5;
+}
+
+div.app {
+  display: flex;
+}
+
+div.folder {
+  width: 150px;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.content {
+  padding: 5px;
+  flex-grow: 1;
+}

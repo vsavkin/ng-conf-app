@@ -1,0 +1,11 @@
+<h2>{{folder | async}}</h2>
+<div role="list">
+  <md-card role="list-item link" *ngFor="let c of conversations|async" [routerLink]="[c.id]">
+    <h3>
+      <a [routerLink]="[c.id]">{{c.title}}</a>
+    </h3>
+    <p>
+      <span class="light">{{c.user.name}} [{{c.user.email}}]</span>
+    </p>
+  </md-card>
+</div>

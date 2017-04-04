@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    Title: <input md-input formControlName="title" required>
+    <span *ngIf="form.get(['title']).touched && form.hasError('required', ['title'])">
+      required
+    </span>
+  </div>
+  <div>
+    Body: <input md-input formControlName="body">
+  </div>
+  <button type="submit" [disabled]="form.invalid">Reply</button>
+</form>
